@@ -1,0 +1,23 @@
+<div class="container__profile">
+  {{#each newUser}}
+    <div class="container__profile-subcontainer">
+        <img
+          class="container__profile-avatar"
+          src={{avatar}}
+          alt=""
+        />
+      <div class="container__profile-name">
+        <img class="Form__login-icon" src="/icons/japon.png" alt="" srcset="" />
+        <h1 class="container__profile-title">{{first_name}} {{last_name}}</h1>
+      </div>
+      <div>
+        <p>🥳 {{age}}</p>
+        <p>📱 {{phone_number}}</p>
+      </div>
+      <div class="linkgoto">
+        <a href="/products" class="goto">Go to Top</a>
+      </div>
+    </div>
+
+  {{/each}}
+</div>

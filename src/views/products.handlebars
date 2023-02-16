@@ -1,0 +1,44 @@
+<nav class="nav__container">
+  <div class="nav__container-titleContainer">
+    <h1 class="nav__container-title">JDM STORE</h1>
+  </div>
+  <div class="nav__container-ulmain">
+    <ul class="nav__container-ul">
+      <li class="nav__container-li">
+        <a class="nav__container-button" href="/addproducts">🚗 add products</a>
+      </li>
+      <li class="nav__container-li">
+        <a class="nav__container-button" href="/cartShopping">🛒 shopping cart</a>
+      </li>
+      <li class="nav__container-li">
+        <a class="nav__container-button" id="btnPerfil">⛽ account </a>
+        <span id="menu"></span>
+      </li>
+      <button class="nav__container-button bordernone" onclick="logout()">👋 logout</button>
+    </ul>
+  </div>
+
+</nav>
+
+<div class="container__flex">
+  {{#each newProducts}}
+    <div class="container__product">
+      <div class="container__product-subContainer">
+        <img class="container__product-img" src={{image}} alt="" />
+        <div class="container__product-model">
+          <h2 class="container_product-text model">{{model}}</h2>
+          <img
+            class="Form__login-icon"
+            src="/icons/japon.png"
+            alt=""
+          />
+        </div>
+        <p class="container_product-text">🚗 {{stock}}</p>
+        <p class="container_product-text">💵 {{price}}</p>
+        <button data-id={{_id}} class="btnadd added">🛒 buy</button>
+      </div>
+    </div>
+  {{/each}}
+</div>
+
+<script src="./js/cart.js"></script>

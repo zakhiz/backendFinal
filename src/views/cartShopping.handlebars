@@ -1,0 +1,27 @@
+<div class="container__flex">
+  {{#each newCart}}
+    <div class="container__product">
+      <div class="container__product-subContainer">
+        <img class="container__product-img" src={{image}} alt="" />
+        <div class="container__product-model">
+          <h2 class="container_product-text model">{{model}}</h2>
+          <img
+            class="Form__login-icon"
+            src="/icons/japon.png"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <p class="container_product-text">💵 {{price}}</p>
+      </div>
+    </div>
+  {{/each}}
+</div>
+<div class="container__btns">
+    {{#each infoUser}}
+    <button class="btncart buy" data-id={{_id}}>buy</button>
+    {{/each}}
+    <a class="btncart" href="/products">back to home</a>
+</div>
+
+<script src="./js/mailer.js"></script>
