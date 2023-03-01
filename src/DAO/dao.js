@@ -4,6 +4,7 @@ import Product from "./models/product.model.js";
 
 export default class Dao {
   constructor(config) {
+    mongoose.set("strictQuery", false);
     this.connection = mongoose.connect(config.mongo.URL);
     const genericTimeStamps ={
         timestamps : {
@@ -42,6 +43,14 @@ export default class Dao {
   updateBy = (id,document,entity) => {
         if(!this.models[entity])throw new Error(`Entity ${entity} not defined in models`)
         return this.models[entity].updateOne({_id: id}, {$set: { cart : document}});
+  }
+  updateById = (id,document,entity) => {
+      if(!this.models[entity])throw new Error(`Entity ${entity} not defined in models`)
+        return this.models[entity].updateOne({_id: id}, {$set: document});
+  }
+  deleteById = (id,entity) => {
+      if(!this.models[entity])throw new Error(`Entity ${entity} not defined in models`)
+        return this.models[entity].findByIdAndDelete({_id : id});
   }
 
 }

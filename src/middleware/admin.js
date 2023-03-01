@@ -12,7 +12,7 @@ export const viewAdmin = async (req, res, next) => {
     if(isadmin[0].role === "admin"){
         next()
     }else{
-        res.render('accessdenegate')
+        res.send('accessdenegate')
     }
     
 };

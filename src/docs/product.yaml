@@ -1,0 +1,156 @@
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: objectId
+          description: Id autogenerado con mongo
+        model:
+          type: String
+          description: modelo del vehiculo
+        characteristics:
+          type: String
+          description : Caracteristicas del vehiculo
+        stock:
+          type: String
+          description: Stock del modelo (no le di un uso)
+        price: 
+          type: String
+          description: Precio del vehiculo
+        image:
+          type: String
+          description: Imagen del modelo
+        patent:
+          type: String
+          description: patente del vehiculo
+      example:
+          _id: 63d95372bbc18f04c6f131f7
+          modelo: Nissan silvia s15
+          characteristics: modelo Nissan
+          stock: "10"
+          price: "50000"
+          image: https://p4.wallpaperbetter.com/wallpaper/67/883/670/nissan-s15-japanes…
+          patent: Yr74LSK=Ub
+  requestBodies:
+      addProduct:
+          type: object
+          properties:
+            model:
+              type: String
+              description: modelo del vehiculo
+            characteristics:
+              type: String
+              description: caracteristica del vehiculo
+            stock:
+              type: String
+              description: stock del productos
+            price:
+              type: String
+              description: precio del vehiculo
+            image:
+              type: String
+              description: imagen del vehiculo
+          example:
+            model: Mazda Rx7 bodymod 27
+            characteristics: body kit nuevo
+            stock: "22"
+            price: "54000"
+            image: https://libertywalk.shop/wp-content/uploads/2023/01/Liberty-Walk-Silhouette-WORKS-Mazda-RX-7.jpg  
+      prodUpdate:
+            type: object
+            properties:
+                 model:
+                    type: String
+                    description: modelo del vehiculo
+                 newModel:
+                    type: String
+                    description: nuevo nombre del modelo del vehiculo
+                 characteristics:
+                    type: String
+                    description: caracteristica del vehiculo
+                 stock:
+                    type: String
+                    description: stock del productos
+                 price:
+                    type: String
+                    description: precio del vehiculo
+                 image:
+                    type: String
+                    description: imagen del vehiculo
+            example:
+                model: Mazda Rx7 bodymod 27
+                newModel: Mazda Rx7 bodymod 37
+                characteristics: modelo nuevo
+                stock: "30"
+                price: "34500"
+                image: https://i.pinimg.com/originals/0c/2e/f7/0c2ef76f10a6530bdcdc55d953491e5a.jpg            
+paths:
+  /api/product:
+    get:
+      summary: Obtiene todos los productos en la base de datos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Los usuarios se encontraron correctamente
+          content: 
+            application/json:
+                schema:
+                    type: object
+                    properties:
+                        status:
+                            type: String
+                            example: success
+                        payload:
+                            type: array
+                            example:
+                              $ref: "#components/schemas/Product"
+    post:
+        summary: añade un nuevo vehiculo (solo con permisos admin)
+        tags:
+          - Products
+        requestBody:
+            content:
+                application/json:
+                      schema:
+                          $ref: "#/components/requestBodies/addProduct" 
+        responses:
+            "200":
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                status:
+                                  type: String
+                                  example: success
+                                payload:
+                                    type: String
+                                    example:
+                                      _id: objectId
+            "400":
+                description: valores incompletos                         
+    put:
+        summary: actualiza las propiedades del vehiculo (solo con permisos admin)
+        tags:
+          - Products
+        requestBody:
+            content:
+                application/json:
+                      schema:
+                          $ref: "#components/requestBodies/prodUpdate"
+        responses:
+              "200":
+                  content:
+                      application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                      type: String
+                                      example: success
+                                    payload:
+                                       type: String
+                                       example:
+                                          _id: objectId                   

@@ -1,8 +1,7 @@
 import { Router } from "express";
 import viewController from "../controller/views.controller.js";
-import { loginMd } from "../middleware/loginMd.middleware.js";
 import { viewAdmin } from "../middleware/admin.js";
-
+//! esto no esta comentado ya que termine usando react para las vistas
 const router = Router();
 router.get("/", viewController.login);
 router.get("/register", viewController.register);

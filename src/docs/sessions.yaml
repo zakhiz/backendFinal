@@ -1,0 +1,204 @@
+components:
+      schemas:
+          User: 
+            type: object
+            properties:
+                _id:
+                    type: objectId
+                    description: Id autogenerado por mongo
+                first_name:
+                    type: String
+                    description: Nombre del usuario
+                last_name:
+                    type: String
+                    description: apellido
+                email:
+                    type: String
+                    description: Email del usuario (dato unico)
+                password: 
+                    type: String
+                    description: Contraseña encriptada del usuario
+                age:
+                    type: String
+                    description: Edad del usuario
+                phone_number:
+                    type: String
+                    description: Numero de telefono del usuario
+                address:
+                    type: String
+                    description: Direccion del usuario
+                avatar: 
+                    type: String
+                    description: Avatar del usuario
+                role:
+                    type: String
+                    description: Rol del usuario (puede ser un usuario comun o un administrador)
+                cart:
+                    type: Array
+                    description: Carrito de compras del usuarios
+                created_at:
+                    type: Date
+                    description: Fecha de registro del usuario
+                udated_at:
+                    type: Date
+                    description: Fecha de la ultima actualizacion del usuario
+            example:
+                  _id: ObjectId('63f2e741fa3007056daa63a6')
+                  first_name: Camille
+                  last_name: grifter
+                  email: camille@correo.com
+                  password: "$2b$10$il/IIfhTEQNA3KwBxUQm2OfA5wIiJ0G777BzvVYCR/rO0oipY"
+                  age: "23"
+                  phone_number: "3255252525335"
+                  address: calle Siempre viva 742
+                  avatar: https://www.thelist.com/img/gallery/the-untold-truth-of-camille-razat/intro-1641575950.jpg
+                  role: user
+                  cart: []
+                  created_at: 2023-02-20T03:21:37.279+00:00
+                  udated_at: 2023-02-20T23:45:25.326+00:00
+      requestBodies:
+          registerUser:
+                  type: object
+                  properties:
+                      first_name:
+                          type: String
+                          description: nombre del usuario
+                      last_name:
+                          type: String
+                          description: apellido del usuario
+                      email:
+                          type: String
+                          description: email del usuario (unico)
+                      password:
+                          type: String
+                          description: Contraseña del usuario sin encriptar
+                      age:
+                          type: String
+                          description: edad del usuario
+                      phone_number:
+                          type: String
+                          description: numero de telefono del usuario
+                      address:
+                          type: String
+                          description: direccion del usuario
+                      avatar:
+                          type: String
+                          description: avatar del usuario
+                  example:
+                      first_name: john
+                      last_name: wick
+                      email: johnwick@gmail.com
+                      password: ChaCha
+                      age: "30"
+                      phone_number: "3255252525252"
+                      address: avenida casi viva 742
+                     
+          loginUser:
+                  type: object
+                  properties:
+                        email:
+                          type: String
+                          description: correo del usuario
+                        password:
+                          type: String
+                          description: Contraseña del usuario
+                  example:
+                          email: johnwick@gmail.com  
+                          password: ChaCha
+paths:
+    /api/sessions/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDkzMzQwNzZiMmJhMzUyZTcwM2MzNyIsInJvbGUiOiJhZG1pbiIsIm5hbWUiOiJqaW1teSBqaW1teSIsImF2YXRhciI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9pbWFnZXMvMTY3NTE3ODgxNjE0Ni0zNjI2NDctNGstd2FsbHBhcGVyLmpwZyIsImFnZSI6MjMsInBob25lX251bWJlciI6NTEzNTE1MTM1LCJhZGRyZXNzIjoiY2FsbGUgZmFsc2EgMTIzIiwiY2FydCI6W10sImlhdCI6MTY3NzYzMTM1OCwiZXhwIjoxNjc3NzE3NzU4fQ.4bwwEfMHf-IqsBFEGeFEoFtIaOAjGJunXGKpWe7lvCs:
+          get:
+            summary: recibe el valor del token (nombre del token = valor del token) luego destokeniza este valor para obtener un id despues de obtenerlo filtra al usuario, se construye un objeto donde solo se mandan las propiedades no sensibles y se manda en la respuesta
+            tags:
+                - sessions
+            responses:
+                "200":
+                    description: encontro al usuario
+                    content:
+                          application/json:
+                              schema:
+                                  type: object
+                                  properties:
+                                  status:
+                                      type: String
+                                      description: success
+                                  payload:
+                                    type: object
+                                    properties:
+                                        _id:
+                                            type: objectId
+                                            description: id del usuario
+                                        first_name:
+                                            type: String
+                                            description: nombre del usuario
+                                        last_name:
+                                            type: String
+                                            description: apellido del usuario
+                                        age:
+                                            type: String
+                                            description: edad del usuario 
+                                        phone_number:
+                                            type: String
+                                            description: numero de telefono del usuario
+                                        address:
+                                            type: String
+                                            description: direccion del usuario
+                                        role:
+                                            type: String
+                                            description: rol del usuario 
+                                        avatar:
+                                            type: String
+                                            description: avatar del usuario
+                                        cart:
+                                            type: Array
+                                            description: carrito del usuario
+    /api/sessions/register:
+        post:
+            summary: crea un nuevo usuario en la base de datos
+            tags: 
+                - sessions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/requestBodies/registerUser"
+            responses:
+                "200":
+                    description: usuario registrado correctamente
+                    content:
+                        application/json:
+                            schema: 
+                                type: object
+                                properties:
+                                    status:
+                                        type: String
+                                        example: success
+                                    payload:
+                                        type: String
+                                        example: 
+                                            _id: objectId
+                "400":
+                      description: el usuario ya existe o envio los valores incompletos
+    /api/sessions/login:
+        post:
+            summary: inicio de sesion del usuario
+            tags:
+                - sessions
+            requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/requestBodies/loginUser"
+            responses:
+                "200":
+                    description: usuario logueado
+                    content:
+                      application/json:
+                          schema: 
+                              type: object
+                              properties:
+                                status:
+                                  type: String
+                                  description: success
+                "400":
+                    description: la password o el email no son validas

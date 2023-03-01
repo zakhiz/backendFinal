@@ -1,0 +1,5 @@
+{"level":"error","message":"Wed Mar 01 2023 15:18:57 GMT-0300 (hora estándar de Argentina) | Petición a la ruta '/api/sessions/login' | Método POST| incomplete values"}
+{"level":"error","message":"Wed Mar 01 2023 15:19:03 GMT-0300 (hora estándar de Argentina) | Petición a la ruta '/api/sessions/login' | Método POST| incomplete values"}
+{"level":"error","message":"Wed Mar 01 2023 15:19:46 GMT-0300 (hora estándar de Argentina) | Petición a la ruta '/api/sessions/login' | Método POST| invalid credentials"}
+{"level":"error","message":"Wed Mar 01 2023 15:20:39 GMT-0300 (hora estándar de Argentina) | Petición a la ruta '/api/sessions/login' | Método POST| invalid credentials"}
+{"level":"error","message":"Wed Mar 01 2023 15:21:12 GMT-0300 (hora estándar de Argentina) | Petición a la ruta '/api/sessions/login' | Método POST| invalid credentials password"}
